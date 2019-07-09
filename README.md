@@ -8,3 +8,4 @@ install it via pip, please try [sparse-learn](https://github.com/baojianzhou/spa
 More details of GraphDA can be found in: "Zhou, Baojian, Feng Chen, and Yiming Ying. "Dual Averaging Method for Online Graph-structured Sparsity." arXiv preprint arXiv:1905.10714 (2019).".
 
 ## Preparation
+Our code is based on [Openblas-0.3.1](https://github.com/xianyi/OpenBLAS/releases/tag/v0.3.1).
