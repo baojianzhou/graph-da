@@ -13,3 +13,5 @@ Our code is based on [Openblas-0.3.1](https://github.com/xianyi/OpenBLAS/release
 >>> cd OpenBLAS-0.3.1
 >>> make && make install PREFIX=../lib
 ```
+
+The lib folder under graph-da and corresponding libraries will be generated.
