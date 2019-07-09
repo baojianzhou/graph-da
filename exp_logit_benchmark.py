@@ -28,9 +28,7 @@ from algo_wrapper.algo_wrapper import algo_online_da_sgl
 from algo_wrapper.algo_wrapper import algo_online_ada_grad
 from algo_wrapper.algo_wrapper import algo_online_da_iht
 from algo_wrapper.algo_wrapper import algo_online_sto_iht
-from algo_wrapper.algo_wrapper import algo_online_graph_sto_iht
 from algo_wrapper.algo_wrapper import algo_online_best_subset
-from algo_wrapper.algo_wrapper import algo_online_graph_da
 
 # see the reference in [1]
 bench_data = {
@@ -92,44 +90,55 @@ def get_para_space(fig_i):
         # baseline-01
         'rda-l1': {
             # lambda: to control the sparsity, original paper: [0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.]
-            'lambda_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 3e-2, 5e-2, 1e-1, 3e-1, 5e-1, 1e0, 3e0, 5e0, 1e1],
+            'lambda_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 3e-2, 5e-2, 1e-1,
+                            3e-1, 5e-1, 1e0, 3e0, 5e0, 1e1],
             # gamma: to control the learning rate. original paper [5000.]
             'gamma_list': [1e0, 5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3, 1e4],
             # rho: to control the sparsity-enhancing parameter. original paper is: [0.0, 0.005]
-            'rho_list': [0.0, 1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 1e-1, 5e-1, 1e0]},
+            'rho_list': [0.0, 1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2,
+                         1e-1, 5e-1, 1e0]},
         # baseline-02
         'da-gl': {
             # lambda: to control the sparsity
-            'lambda_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 3e-2, 5e-2, 1e-1, 3e-1, 5e-1, 1e0, 3e0, 5e0, 1e1],
+            'lambda_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 3e-2, 5e-2, 1e-1,
+                            3e-1, 5e-1, 1e0, 3e0, 5e0, 1e1],
             # gamma: to control the learning rate.
             'gamma_list': [1e0, 5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3, 1e4]},
         # baseline-03
         'da-sgl': {
             # lambda: to control the sparsity
-            'lambda_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 3e-2, 5e-2, 1e-1, 3e-1, 5e-1, 1e0, 3e0, 5e0, 1e1],
+            'lambda_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 3e-2, 5e-2, 1e-1,
+                            3e-1, 5e-1, 1e0, 3e0, 5e0, 1e1],
             # gamma: to control the learning rate.
             'gamma_list': [1e0, 5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3, 1e4]},
         # baseline-04
         'adagrad': {
             # lambda: to control the sparsity
-            'lambda_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 3e-2, 5e-2, 1e-1, 3e-1, 5e-1, 1e0, 3e0, 5e0, 1e1],
+            'lambda_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 3e-2, 5e-2, 1e-1,
+                            3e-1, 5e-1, 1e0, 3e0, 5e0, 1e1],
             # eta: to control the learning rate.
-            'eta_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 1e-1, 5e-1, 1e0, 5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3],
+            'eta_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 1e-1, 5e-1, 1e0,
+                         5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3],
             # to avoid divided by zero.
             'epsilon_list': [1e-8]},
         # baseline-05
         'sto-iht': {
             # s: to control the sparsity
-            's_list': [5, 10, 15, 20, 25, 26, 30, 35, 40, 45, 46, 50, 55, 60, 65, 70, 75, 80, 85,
-                       90, 92, 95, 100, 105, 110, 115, 120, 125, 130, 132, 135, 140, 145, 150],
+            's_list': [5, 10, 15, 20, 25, 26, 30, 35, 40, 45, 46, 50, 55, 60,
+                       65, 70, 75, 80, 85,
+                       90, 92, 95, 100, 105, 110, 115, 120, 125, 130, 132, 135,
+                       140, 145, 150],
             # lr: to control the learning rate of sto-iht
-            'lr_list': [1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 1e-1, 5e-1],
+            'lr_list': [1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 1e-1,
+                        5e-1],
             # l2-regularization parameter.
             'l2_lambda_list': [0e0]},
         # baseline-06
         'da-iht': {
-            's_list': [5, 10, 15, 20, 25, 26, 30, 35, 40, 45, 46, 50, 55, 60, 65, 70, 75, 80, 85,
-                       90, 92, 95, 100, 105, 110, 115, 120, 125, 130, 132, 135, 140, 145, 150],
+            's_list': [5, 10, 15, 20, 25, 26, 30, 35, 40, 45, 46, 50, 55, 60,
+                       65, 70, 75, 80, 85,
+                       90, 92, 95, 100, 105, 110, 115, 120, 125, 130, 132, 135,
+                       140, 145, 150],
             # gamma: to control the learning rate.
             'gamma_list': [1e0, 5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3, 1e4],
             # l2-regularization parameter.
@@ -155,8 +164,10 @@ def get_para_space(fig_i):
             's_list': [len(bench_data[fig_i])]},
         # baseline-08
         'graph-sto-iht': {
-            's_list': [5, 10, 15, 20, 25, 26, 30, 35, 40, 45, 46, 50, 55, 60, 65, 70, 75, 80, 85,
-                       90, 92, 95, 100, 105, 110, 115, 120, 125, 130, 132, 135, 140, 145, 150],
+            's_list': [5, 10, 15, 20, 25, 26, 30, 35, 40, 45, 46, 50, 55, 60,
+                       65, 70, 75, 80, 85,
+                       90, 92, 95, 100, 105, 110, 115, 120, 125, 130, 132, 135,
+                       140, 145, 150],
             'l2_lambda_list': [0.0],
             # to control the learning rate
             'lr_list': [1e-3, 1e-2, 1e-1, 1e0],
@@ -164,8 +175,10 @@ def get_para_space(fig_i):
             'max_num_iter_list': [20],
             'num_clusters_list': [1]},
         'graph-da-iht': {
-            's_list': [5, 10, 15, 20, 25, 26, 30, 35, 40, 45, 46, 50, 55, 60, 65, 70, 75, 80, 85,
-                       90, 92, 95, 100, 105, 110, 115, 120, 125, 130, 132, 135, 140, 145, 150],
+            's_list': [5, 10, 15, 20, 25, 26, 30, 35, 40, 45, 46, 50, 55, 60,
+                       65, 70, 75, 80, 85,
+                       90, 92, 95, 100, 105, 110, 115, 120, 125, 130, 132, 135,
+                       140, 145, 150],
             'l2_lambda_list': [0.0],
             # to control the learning rate.
             'gamma_list': [1e0, 5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3, 1e4],
@@ -301,8 +314,10 @@ def generate_re(para, result, algo_para):
     pred_nodes_wt = np.nonzero(wt[:para['p']])[0]
     n_pre_rec_fm_wt = node_pre_rec_fm(subgraph, pred_nodes_wt)
     node_fm_wt = n_pre_rec_fm_wt[2]
-    te_acc_node_fm_wt = 2. * (te_acc_wt * node_fm_wt) / (te_acc_wt + node_fm_wt)
-    va_acc_node_fm_wt = 2. * (va_acc_wt * node_fm_wt) / (va_acc_wt + node_fm_wt)
+    te_acc_node_fm_wt = 2. * (te_acc_wt * node_fm_wt) / (
+            te_acc_wt + node_fm_wt)
+    va_acc_node_fm_wt = 2. * (va_acc_wt * node_fm_wt) / (
+            va_acc_wt + node_fm_wt)
 
     # to use model wt_bar
     te_pred_prob_wt_bar, te_pred_y_wt_bar = logistic_predict(x_te, wt_bar)
@@ -316,8 +331,10 @@ def generate_re(para, result, algo_para):
     pred_nodes_wt_bar = np.nonzero(wt_bar[:para['p']])[0]
     n_pre_rec_fm_wt_bar = node_pre_rec_fm(subgraph, pred_nodes_wt_bar)
     node_fm_wt_bar = n_pre_rec_fm_wt_bar[2]
-    va_acc_node_fm_wt_bar = 2. * (va_acc_wt_bar * node_fm_wt_bar) / (va_acc_wt_bar + node_fm_wt_bar)
-    te_acc_node_fm_wt_bar = 2. * (te_acc_wt_bar * node_fm_wt_bar) / (te_acc_wt_bar + node_fm_wt_bar)
+    va_acc_node_fm_wt_bar = 2. * (va_acc_wt_bar * node_fm_wt_bar) / (
+            va_acc_wt_bar + node_fm_wt_bar)
+    te_acc_node_fm_wt_bar = 2. * (te_acc_wt_bar * node_fm_wt_bar) / (
+            te_acc_wt_bar + node_fm_wt_bar)
     re = {'mu': para['mu'],
           'fig_id': para['fig_id'],
           'subgraph': para['subgraph'],
@@ -371,9 +388,11 @@ def generate_re(para, result, algo_para):
 def algo_rda_l1(data):
     results = []
     para = data['para_space']['rda-l1']
-    for (lambda_, gamma, rho) in product(para['lambda_list'], para['gamma_list'], para['rho_list']):
+    for (lambda_, gamma, rho) in product(para['lambda_list'],
+                                         para['gamma_list'], para['rho_list']):
         result = algo_online_rda_l1(
-            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), lambda_, gamma, rho, 'logistic', 0)
+            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), lambda_,
+            gamma, rho, 'logistic', 0)
         results.append(generate_re(data, result, (lambda_, gamma, rho)))
     return results
 
@@ -436,9 +455,11 @@ def algo_adam(data):
     results = []
     para = data['para_space']['adam']
     for (alpha, beta1, beta2, epsilon) in product(
-            para['alpha_list'], para['beta1_list'], para['beta2_list'], para['epsilon_list']):
+            para['alpha_list'], para['beta1_list'], para['beta2_list'],
+            para['epsilon_list']):
         result = algo_online_adam(
-            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), alpha, beta1, beta2, epsilon, 'logistic', 0)
+            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), alpha, beta1,
+            beta2, epsilon, 'logistic', 0)
         results.append(generate_re(data, result, alpha))
     return results
 
@@ -446,9 +467,12 @@ def algo_adam(data):
 def algo_adagrad(data):
     results = []
     para = data['para_space']['adagrad']
-    for (lambda_, eta, epsilon) in product(para['lambda_list'], para['eta_list'], para['epsilon_list']):
+    for (lambda_, eta, epsilon) in product(para['lambda_list'],
+                                           para['eta_list'],
+                                           para['epsilon_list']):
         result = algo_online_ada_grad(
-            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), lambda_, eta, epsilon, 'logistic', 0)
+            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), lambda_, eta,
+            epsilon, 'logistic', 0)
         results.append(generate_re(data, result, (lambda_, eta)))
     return results
 
@@ -457,9 +481,11 @@ def algo_best_subset(data):
     results = []
     para = data['para_space']['best-subset']
     best_subset = para['best_subset']
-    for (s, gamma, l2_lambda) in product(para['s_list'], para['gamma_list'], para['l2_lambda_list']):
+    for (s, gamma, l2_lambda) in product(para['s_list'], para['gamma_list'],
+                                         para['l2_lambda_list']):
         result = algo_online_best_subset(
-            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), best_subset, gamma, l2_lambda, s, 'logistic', 0)
+            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), best_subset,
+            gamma, l2_lambda, s, 'logistic', 0)
         results.append(generate_re(data, result, (s, gamma, l2_lambda)))
     return results
 
@@ -467,9 +493,11 @@ def algo_best_subset(data):
 def algo_sto_iht(data):
     results = []
     para = data['para_space']['sto-iht']
-    for (lr, l2_lambda, s) in product(para['lr_list'], para['l2_lambda_list'], para['s_list']):
+    for (lr, l2_lambda, s) in product(para['lr_list'], para['l2_lambda_list'],
+                                      para['s_list']):
         result = algo_online_sto_iht(
-            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), lr, l2_lambda, s, 'logistic', 0)
+            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), lr, l2_lambda,
+            s, 'logistic', 0)
         results.append(generate_re(data, result, (lr, l2_lambda)))
     return results
 
@@ -477,9 +505,12 @@ def algo_sto_iht(data):
 def algo_da_iht(data):
     results = []
     para = data['para_space']['da-iht']
-    for (gamma, l2_lambda, s) in product(para['gamma_list'], para['l2_lambda_list'], para['s_list']):
+    for (gamma, l2_lambda, s) in product(para['gamma_list'],
+                                         para['l2_lambda_list'],
+                                         para['s_list']):
         result = algo_online_da_iht(
-            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), gamma, l2_lambda, s, 'logistic', 0)
+            data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1), gamma,
+            l2_lambda, s, 'logistic', 0)
         results.append(generate_re(data, result, (gamma, l2_lambda, s)))
     return results
 
@@ -488,7 +519,8 @@ def algo_graph_sto_iht(data, para_pair):
     s, l2_lambda, lr, ratio, max_num_iter, num_clusters = para_pair
     result = algo_online_graph_sto_iht(
         data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1),
-        lr, l2_lambda, data['edges'], data['weights'], num_clusters, s, ratio, max_num_iter, 'logistic', 0)
+        lr, l2_lambda, data['edges'], data['weights'], num_clusters, s, ratio,
+        max_num_iter, 'logistic', 0)
     para = (s, l2_lambda, lr, ratio, max_num_iter, num_clusters)
     re = generate_re(data, result, para)
     return [re]
@@ -498,7 +530,8 @@ def algo_graph_da_iht(data, para_pair):
     s, l2_lambda, gamma, ratio, max_num_iter, num_clusters = para_pair
     result = algo_online_graph_da(
         data['x_tr'], data['y_tr'], np.zeros(data['p'] + 1),
-        gamma, l2_lambda, data['edges'], data['weights'], num_clusters, s, ratio, max_num_iter, 'logistic', 0)
+        gamma, l2_lambda, data['edges'], data['weights'], num_clusters, s,
+        ratio, max_num_iter, 'logistic', 0)
     para = (gamma, l2_lambda, s, ratio, max_num_iter, num_clusters)
     re = generate_re(data, result, para)
     return [re]
@@ -605,7 +638,8 @@ def run_exp_fix_tr_mu(root, trial_i, num_cpus):
     mu, num_tr = 0.3, 400
     for (fig_i, fig_ind) in bench_data['fig_list']:
         start_time = time.time()
-        f_name = root_in + 'fig%d_mu_%.1f_trial_%02d.pkl' % (fig_ind, mu, trial_i)
+        f_name = root_in + 'fig%d_mu_%.1f_trial_%02d.pkl' % (
+            fig_ind, mu, trial_i)
         if not os.path.exists(f_name):
             print('cannot find file: %s' % f_name)
             exit(0)
@@ -619,9 +653,11 @@ def run_exp_fix_tr_mu(root, trial_i, num_cpus):
         results_pool = [_ for results in results_pool for _ in results]
         pool.close()
         pool.join()
-        print('run time: %.4f seconds of trail: %d' % (time.time() - start_time, trial_i))
+        print('run time: %.4f seconds of trail: %d' % (
+            time.time() - start_time, trial_i))
         out = get_results_pool(results_pool, data, method_list)
-        f_name = '../results/benchmark/fix_tr_mu/fig%d_mu_%.1f_trial_%02d_fix_tr_mu.pkl' % (fig_ind, mu, trial_i)
+        f_name = '../results/benchmark/fix_tr_mu/fig%d_mu_%.1f_trial_%02d_fix_tr_mu.pkl' % (
+            fig_ind, mu, trial_i)
         pickle.dump(out, open(f_name, 'wb'))
 
 
@@ -639,7 +675,8 @@ def run_exp_diff_tr(root, trial_i, num_cpus):
     mu, num_trials = 0.3, 20
     num_tr_list = [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
     for (fig_i, fig_ind) in bench_data['fig_list']:
-        f_name = root_in + 'fig%d_mu_%.1f_trial_%02d.pkl' % (fig_ind, mu, trial_i)
+        f_name = root_in + 'fig%d_mu_%.1f_trial_%02d.pkl' % (
+            fig_ind, mu, trial_i)
         if not os.path.exists(f_name):
             print('cannot find file: %s' % f_name)
             exit(0)
@@ -657,10 +694,12 @@ def run_exp_diff_tr(root, trial_i, num_cpus):
             results_pool = [_ for results in results_pool for _ in results]
             pool.close()
             pool.join()
-            print('run time: %.4f seconds of trail: %d with n: %d' % (time.time() - start_time, trial_i, num_tr))
+            print('run time: %.4f seconds of trail: %d with n: %d' % (
+                time.time() - start_time, trial_i, num_tr))
             out = get_results_pool(results_pool, data, method_list)
             all_results[num_tr] = out
-        f_name = '../results/benchmark/diff_tr/fig%d_mu_%.1f_trial_%02d_diff_tr.pkl' % (fig_ind, mu, trial_i)
+        f_name = '../results/benchmark/diff_tr/fig%d_mu_%.1f_trial_%02d_diff_tr.pkl' % (
+            fig_ind, mu, trial_i)
         pickle.dump(all_results, open(f_name, 'wb'))
 
 
@@ -672,13 +711,16 @@ def run_exp_diff_mu(root, trial_i, num_cpus):
     :param num_cpus:
     :return:
     """
-    method_list = ['rda-l1', 'da-iht', 'adagrad', 'sto-iht', 'graph-sto-iht', 'da-gl', 'da-sgl', 'adam', 'graph-da-iht']
+    method_list = ['rda-l1', 'da-iht', 'adagrad', 'sto-iht', 'graph-sto-iht',
+                   'da-gl', 'da-sgl', 'adam',
+                   'graph-da-iht']
     root_in = root + 'input/'
     num_tr, num_va, num_te = 400, 400, 400
     mu_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.]
     for (fig_i, fig_ind) in bench_data['fig_list']:
         for mu in mu_list:
-            f_name = root_in + 'fig%d_mu_%.1f_trial_%02d.pkl' % (fig_ind, mu, trial_i)
+            f_name = root_in + 'fig%d_mu_%.1f_trial_%02d.pkl' % (
+                fig_ind, mu, trial_i)
             if not os.path.exists(f_name):
                 print('cannot find file: %s, please generate dataset' % f_name)
                 exit(0)
@@ -693,7 +735,8 @@ def run_exp_diff_mu(root, trial_i, num_cpus):
             pool.close()
             pool.join()
             out = get_results_pool(results_pool, data, method_list)
-            f = '../results/benchmark/diff_mu/fig%d_mu_%.1f_trial_%02d_diff_mu.pkl' % (fig_ind, mu, trial_i)
+            f = '../results/benchmark/diff_mu/fig%d_mu_%.1f_trial_%02d_diff_mu.pkl' % (
+                fig_ind, mu, trial_i)
             print('save results to: %s' % f)
             pickle.dump(out, open(f, 'wb'))
 
@@ -721,7 +764,8 @@ def run_exp_diff_s(root, trial_i, num_cpus):
             para = {
                 'adam': {
                     # lambda: to control the sparsity
-                    'alpha_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 1e-1, 5e-1],
+                    'alpha_list': [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 1e-1,
+                                   5e-1],
                     # the parameter for the first moment.
                     'beta1_list': [0.9],
                     # the parameter for the second moment.
@@ -733,7 +777,8 @@ def run_exp_diff_s(root, trial_i, num_cpus):
                     # to control l2-regularization parameter
                     'l2_lambda_list': [0.0],
                     # to control the learning rate.
-                    'gamma_list': [1e0, 5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3, 1e4],
+                    'gamma_list': [1e0, 5e0, 1e1, 5e1, 1e2, 5e2, 1e3, 5e3,
+                                   1e4],
                     # head-tail budget para
                     'ratio_list': [0.1],
                     'max_num_iter_list': [20],
@@ -755,10 +800,12 @@ def run_exp_diff_s(root, trial_i, num_cpus):
             results_pool = [_ for results in results_pool for _ in results]
             pool.close()
             pool.join()
-            print('run time: %.4f seconds of trail: %d with s: %d' % (time.time() - start_time, trial_i, s))
+            print('run time: %.4f seconds of trail: %d with s: %d' % (
+                time.time() - start_time, trial_i, s))
             out = get_results_pool(results_pool, data, method_list)
             all_results[s] = out
-        f_name = '../results/benchmark/diff_s/fig%d_mu_%.1f_trial_%02d_diff_s.pkl' % (i, mu, trial_i)
+        f_name = '../results/benchmark/diff_s/fig%d_mu_%.1f_trial_%02d_diff_s.pkl' % (
+            i, mu, trial_i)
         print('save file: %s' % f_name)
         pickle.dump(all_results, open(f_name, 'wb'))
 
@@ -768,15 +815,18 @@ def print_result(method_labels, all_methods, all_results):
     for metric in ['best-acc']:
         print('-' * 100)
         print('-' * 36 + ' selected by %s ' % metric + '-' * 36)
-        print('Method & \\textit{Pre}$\pm$std & \\textit{Rec}$\pm$std & \\textit{F1}$\pm$std & '
-              '${AUC}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$ & '
-              '${Acc}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$ & '
-              '${Miss}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$ & '
-              '${NN}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$\\\\')
+        print(
+            'Method & \\textit{Pre}$\pm$std & \\textit{Rec}$\pm$std & \\textit{F1}$\pm$std & '
+            '${AUC}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$ & '
+            '${Acc}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$ & '
+            '${Miss}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$ & '
+            '${NN}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$\\\\')
         for method in all_methods:
-            best_n_fm_wt = [re[0]['%s-wt' % metric] for case in all_results for re in case if re[1] == method]
+            best_n_fm_wt = [re[0]['%s-wt' % metric] for case in all_results for
+                            re in case if re[1] == method]
             p = best_n_fm_wt[0]['p']
-            best_n_fm_wt_bar = [re[0]['%s-wt-bar' % metric] for case in all_results for re in case if re[1] == method]
+            best_n_fm_wt_bar = [re[0]['%s-wt-bar' % metric] for case in
+                                all_results for re in case if re[1] == method]
             node_pre = [_['te_n_pre_rec_fm_wt'][0] for _ in best_n_fm_wt]
             node_rec = [_['te_n_pre_rec_fm_wt'][1] for _ in best_n_fm_wt]
             node_fm = [_['te_n_pre_rec_fm_wt'][2] for _ in best_n_fm_wt]
@@ -786,8 +836,12 @@ def print_result(method_labels, all_methods, all_results):
             acc_wt_bar = [_['te_acc_wt_bar'] for _ in best_n_fm_wt_bar]
             missed_wt = [_['missed_wt'][-1] for _ in best_n_fm_wt]
             missed_wt_bar = [_['missed_wt_bar'][-1] for _ in best_n_fm_wt]
-            nonzero_ratio1 = [float(len(np.nonzero(_['wt'][:p])[0])) * 100. / float(p) for _ in best_n_fm_wt]
-            nonzero_ratio2 = [float(len(np.nonzero(_['wt_bar'][:p])[0])) * 100. / float(p) for _ in best_n_fm_wt]
+            nonzero_ratio1 = [
+                float(len(np.nonzero(_['wt'][:p])[0])) * 100. / float(p) for _
+                in best_n_fm_wt]
+            nonzero_ratio2 = [
+                float(len(np.nonzero(_['wt_bar'][:p])[0])) * 100. / float(p)
+                for _ in best_n_fm_wt]
             if nonzero_ratio1 == 1.0 and nonzero_ratio2 == 1.0:
                 p_str = '%12s & %.3f$\pm$%.2f & %.3f$\pm$%.2f & %.3f$\pm$%.2f & (%.3f, %.3f) & (%.3f, ' \
                         '%.3f) & (%3.2f, %3.2f) & (%2.2f\\%%, %2.2f\\%%) \\\\'
@@ -824,9 +878,11 @@ def print_result_2(method_labels, all_methods, all_results):
               '${Miss}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$ & '
               '${NN}_{{\\bf w}_t,{\\bar{\\bf w}}_t}$\\\\')
         for method in all_methods:
-            best_n_fm_wt = [re[0]['%s-wt' % metric] for case in all_results for re in case if re[1] == method]
+            best_n_fm_wt = [re[0]['%s-wt' % metric] for case in all_results for
+                            re in case if re[1] == method]
             p = best_n_fm_wt[0]['p']
-            best_n_fm_wt_bar = [re[0]['%s-wt-bar' % metric] for case in all_results for re in case if re[1] == method]
+            best_n_fm_wt_bar = [re[0]['%s-wt-bar' % metric] for case in
+                                all_results for re in case if re[1] == method]
             node_pre = [_['te_n_pre_rec_fm_wt'][0] for _ in best_n_fm_wt]
             node_rec = [_['te_n_pre_rec_fm_wt'][1] for _ in best_n_fm_wt]
             node_fm = [_['te_n_pre_rec_fm_wt'][2] for _ in best_n_fm_wt]
@@ -836,8 +892,12 @@ def print_result_2(method_labels, all_methods, all_results):
             acc_wt_bar = [_['te_acc_wt_bar'] for _ in best_n_fm_wt_bar]
             missed_wt = [_['missed_wt'][-1] for _ in best_n_fm_wt]
             missed_wt_bar = [_['missed_wt_bar'][-1] for _ in best_n_fm_wt]
-            nonzero_ratio1 = [float(len(np.nonzero(_['wt'][:p])[0])) * 100. / float(p) for _ in best_n_fm_wt]
-            nonzero_ratio2 = [float(len(np.nonzero(_['wt_bar'][:p])[0])) * 100. / float(p) for _ in best_n_fm_wt]
+            nonzero_ratio1 = [
+                float(len(np.nonzero(_['wt'][:p])[0])) * 100. / float(p) for _
+                in best_n_fm_wt]
+            nonzero_ratio2 = [
+                float(len(np.nonzero(_['wt_bar'][:p])[0])) * 100. / float(p)
+                for _ in best_n_fm_wt]
             if nonzero_ratio1 == 1.0 and nonzero_ratio2 == 1.0:
                 p_str = '%12s & %.3f & %.3f & %.3f & (%.3f, %.3f) & (%.3f, ' \
                         '%.3f) & (%3.f, %3.f) & (%2.2f\\%%, %2.2f\\%%) \\\\'
@@ -867,11 +927,15 @@ def show_wt(fig_id, trial_i, model):
     import matplotlib.pyplot as plt
     length, width = 33, 33
     # we use the first figure to do the experiments.
-    f_name = 'results/fix_tr_mu/fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (fig_id, trial_i)
+    f_name = 'results/fix_tr_mu/fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (
+        fig_id, trial_i)
     results = pickle.load(open(f_name))['summary_results']
     results = {_[1]: _[0] for _ in results}
-    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'da-sgl', 'sto-iht', 'graph-sto-iht', 'da-iht', 'graph-da-iht']
-    label_list = ['ADAM', 'RDA-L1', 'AdaGrad', 'DA-GL', 'DA-SGL', 'StoIHT', 'GraphIHT', 'DA-IHT', 'GraphDA']
+    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'da-sgl', 'sto-iht',
+                   'graph-sto-iht', 'da-iht',
+                   'graph-da-iht']
+    label_list = ['ADAM', 'RDA-L1', 'AdaGrad', 'DA-GL', 'DA-SGL', 'StoIHT',
+                  'GraphIHT', 'DA-IHT', 'GraphDA']
     from matplotlib import rc
     from pylab import rcParams
     font = {'size': 12}
@@ -886,7 +950,8 @@ def show_wt(fig_id, trial_i, model):
         if model == 'wt':
             w[w > 0] = 1.
             w[w < 0] = -1.
-            ax[i / 5, i % 5].imshow(w.reshape(length, width), cmap='gray', vmin=-1, vmax=1)
+            ax[i / 5, i % 5].imshow(w.reshape(length, width), cmap='gray',
+                                    vmin=-1, vmax=1)
         else:
             ax[i / 5, i % 5].imshow(w.reshape(length, width))
         ax[i / 5, i % 5].set_title('%s' % label_list[i])
@@ -902,7 +967,8 @@ def show_wt(fig_id, trial_i, model):
     ax[1, 4].set_yticklabels('')
     ax[1, 4].set_xticklabels('')
     fig = plt.gcf()
-    f_name = 'results/figs/fix_tr_mu_fig%d_mu_0.3_trial_%02d_%s.pdf' % (fig_id, trial_i, model)
+    f_name = 'results/figs/fix_tr_mu_fig%d_mu_0.3_trial_%02d_%s.pdf' % (
+        fig_id, trial_i, model)
     print('save fig to: %s' % f_name)
     fig.savefig(f_name, dpi=600, bbox_inches='tight', pad_inches=0,
                 format='pdf')
@@ -913,14 +979,18 @@ def show_wt_2(fig_id, trial_i):
     import matplotlib.pyplot as plt
     length, width = 33, 33
     # we use the first figure to do the experiments.
-    f_name = 'results/fix_tr_mu/fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (fig_id, trial_i)
+    f_name = 'results/fix_tr_mu/fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (
+        fig_id, trial_i)
     results = pickle.load(open(f_name))['summary_results']
     results = {_[1]: _[0] for _ in results}
-    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'da-sgl', 'sto-iht', 'graph-sto-iht', 'da-iht', 'graph-da-iht']
+    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'da-sgl', 'sto-iht',
+                   'graph-sto-iht', 'da-iht',
+                   'graph-da-iht']
     label_list = ['\\textbf{\\textsc{ADAM}}', '\\textbf{\\textsc{RDA-L1}}',
                   '\\textbf{\\textsc{AdaGrad}}', '\\textbf{\\textsc{DA-GL}}',
                   '\\textbf{\\textsc{DA-SGL}}', '\\textbf{\\textsc{StoIHT}}',
-                  '\\textbf{\\textsc{GraphStoIHT}}', '\\textbf{\\textsc{DA-IHT}}', '\\textbf{\\textsc{GraphDA}}']
+                  '\\textbf{\\textsc{GraphStoIHT}}',
+                  '\\textbf{\\textsc{DA-IHT}}', '\\textbf{\\textsc{GraphDA}}']
     from matplotlib import rc
     from pylab import rcParams
     font = {'size': 12}
@@ -967,10 +1037,12 @@ def show_wt_2(fig_id, trial_i):
     ax[1, 9].imshow(w.reshape(length, width), cmap='gray', vmin=-1, vmax=1)
     ax[0, 9].set_title('\\textbf{\\textsc{True Model}}')
     fig = plt.gcf()
-    f_name = 'results/figs/fix_tr_mu_fig%d_mu_03_trial_%02d.pdf' % (fig_id, trial_i)
+    f_name = 'results/figs/fix_tr_mu_fig%d_mu_03_trial_%02d.pdf' % (
+        fig_id, trial_i)
     print('save fig to: %s' % f_name)
     plt.subplots_adjust(wspace=0.01, hspace=0.01)
-    fig.savefig(f_name, dpi=600, bbox_inches='tight', pad_inches=0, format='pdf')
+    fig.savefig(f_name, dpi=600, bbox_inches='tight', pad_inches=0,
+                format='pdf')
     plt.close()
 
 
@@ -1007,8 +1079,10 @@ def show_mistakes(root, fig_id, trial_i):
             ax[1, 1].legend(loc='upper center',
                             bbox_to_anchor=(0.5, -0.18), ncol=5)
             if ind_metric == 0:
-                ax[0, ind_metric].set_ylabel(r"Mistakes($\displaystyle {\bf w}_t $)")
-                ax[1, ind_metric].set_ylabel(r"Mistakes($\displaystyle \bar{{\bf w}_t} $)")
+                ax[0, ind_metric].set_ylabel(
+                    r"Mistakes($\displaystyle {\bf w}_t $)")
+                ax[1, ind_metric].set_ylabel(
+                    r"Mistakes($\displaystyle \bar{{\bf w}_t} $)")
             else:
                 ax[0, ind_metric].set_yticklabels('')
                 ax[1, ind_metric].set_yticklabels('')
@@ -1023,7 +1097,8 @@ def show_mistakes(root, fig_id, trial_i):
     plt.subplots_adjust(wspace=0, hspace=0)
     if not os.path.exists(root + 'figs'):
         os.mkdir(root + 'figs')
-    f_name = root + 'figs/simu_fig%d_mu_0.3_trial_%02d_mistakes.pdf' % (fig_id, trial_i)
+    f_name = root + 'figs/simu_fig%d_mu_0.3_trial_%02d_mistakes.pdf' % (
+        fig_id, trial_i)
     print('save fig to: %s' % f_name)
     fig.savefig(f_name, dpi=600, bbox_inches='tight', pad_inches=0,
                 format='pdf')
@@ -1032,85 +1107,19 @@ def show_mistakes(root, fig_id, trial_i):
 
 def show_figure_1():
     """
-    Figure 1 is generated by the following latex commands:
-    \begin{figure}[ht!]
-    \centering
-    \begin{tikzpicture}
-      [scale=.9,auto=left,every node/.style={draw,circle,thick,fill=black!10}]
-      \node (n16) at (1,9)  {${w}_6$};
-      \node (n14) at (0,8)  {${w}_4$};
-      \node[fill=red!50] (n15) at (1,8)  {${w}_5$};
-      \node[fill=red!50] (n11) at (2,8)  {${w}_1$};
-      \node[fill=red!50] (n12) at (2,7)  {$w_2$};
-      \node (n13) at (0,7)  {$w_3$};
-      %-------------
-      \node[fill=red!50]  (n26) at (4,9)  {$w_6$};
-      \node (n24) at (3,8)  {$w_4$};
-      \node[fill=red!50]  (n25) at (4,8)  {$w_5$};
-      \node (n21) at (5,8)  {$w_1$};
-      \node[fill=red!50]  (n22) at (5,7)  {$w_2$};
-      \node (n23) at (3,7)  {$w_3$};
-      %------------
-      \node[fill=red!50]  (n36) at (7,9)  {$w_6$};
-      \node[fill=red!50]  (n34) at (6,8)  {$w_4$};
-      \node[fill=red!50]  (n35) at (7,8)  {$w_5$};
-      \node (n31) at (8,8)  {$w_1$};
-      \node (n32) at (8,7)  {$w_2$};
-      \node[fill=red!40]  (n33) at (6,7)  {$w_3$};
-      \foreach \from/\to in {n16/n14,n14/n15,n12/n13,n13/n14,
-      n26/n24,n24/n25,n25/n21,n21/n22,n22/n23,n23/n24,
-      n35/n31,n31/n32,n32/n35,n32/n33}
-        \draw[line width=0.3mm] (\from) -- (\to);
-        \foreach \from/\to in {n15/n11,n11/n12,n12/n15}
-        \draw[line width=1.6mm, red!50] (\from) -- (\to);
-        \foreach \from/\to in {n22/n25}
-        \draw[line width=1.6mm, red!50] (\from) -- (\to);
-        \foreach \from/\to in {n36/n34,n34/n35,n33/n34}
-        \draw[line width=1.6mm, red!50] (\from) -- (\to);
-    \draw[dashed] (2.5,6.5) -- (2.5,9.6);
-    \draw[dashed] (5.5,6.5) -- (5.5,9.6);
-    \newcommand{\Cross}{$\mathbin{\tikz [x=1.4ex,y=1.4ex,line width=.2ex, red] \draw (0,0) -- (1,1) (0,1) -- (1,0);}$}%
-    \newcommand{\Checkmark}{$\color{green}\checkmark$}
-    \node[draw=white,fill=white] at (1.2, 6.3)  {\Checkmark};
-    \node[draw=white,fill=white] at (4.2, 6.3)  {\Cross};
-    \node[draw=white,fill=white] at (7.2, 6.3)  {\Cross};
-    \end{tikzpicture}
-    \vspace{-5mm}
-    \caption{A toy example of Weighted Graph Model}
-    \label{figure:toy_example}
-    \end{figure}
-
-    :return:
+    Figure 1 is generated by the latex code at: figs/figure_01.tex
     """
-    print('please check the latex commands in comments.')
-
-
-def show_4_tables():
-    all_methods = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'da-sgl', 'sto-iht', 'graph-sto-iht', 'da-iht', 'graph-da-iht']
-    method_labels = {'rda-l1': '\\textbf{$\displaystyle \ell_1$-\\textsc{RDA}}',
-                     'da-iht': '\\textbf{\\textsc{DA-IHT}}',
-                     'adagrad': '\\textbf{\\textsc{AdaGrad}}', 'sto-iht': '\\textbf{\\textsc{StoIHT}}',
-                     'graph-sto-iht': '\\textbf{\\textsc{GraphStoIHT}}', 'da-gl': '\\textbf{\\textsc{DA-GL}}',
-                     'da-sgl': '\\textbf{\\textsc{DA-SGL}}', 'adam': '\\textbf{\\textsc{ADAM}}',
-                     'graph-da-iht': '\\textbf{\\textsc{GraphDA}}', 'best-subset': '\\textbf{\\textsc{BestSubset}}'}
-    num_trials, root = 20, '../results/benchmark/fix_tr_mu/'
-    for (fig_i, i) in bench_data['fig_list']:
-        print('\n\n--- %s ---' % fig_i)
-        all_results = []
-        for trial_i in range(num_trials):
-            f_name = root + 'fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (i, trial_i)
-            out = pickle.load(open(f_name))
-            all_results.append(out['summary_results'])
-        if fig_i == 'fig_1':
-            print_result(method_labels, all_methods, all_results)
-        else:
-            print_result_2(method_labels, all_methods, all_results)
+    print('please check the latex code at: figs/figure_01.tex')
 
 
 def show_figure_2():
+    """
+    To generate Figure 2, you may need tex: https://www.tug.org/texlive/
+    """
     import networkx as nx
     import matplotlib.pyplot as plt
     from matplotlib import rc
+    #
     plt.rcParams["font.family"] = "Times New Roman"
     plt.rcParams["font.size"] = 18
     rc('text', usetex=True)
@@ -1134,14 +1143,19 @@ def show_figure_2():
         for index, (i, j) in enumerate(product(range(height), range(width))):
             graph.add_node(index)
             pos[index] = (j, height - i)
-        print('generate subgraph, which has %s nodes.' % bench_data['s'][fig_i])
-        nx.draw_networkx_nodes(graph, pos, node_size=5, nodelist=range(p), linewidths=.2,
-                               node_color='w', edgecolors='gray', font_size=6)
-        nx.draw_networkx_nodes(graph, pos, node_size=5, nodelist=bench_data[fig_i],
-                               linewidths=.2, node_color=[1.] * len(bench_data[fig_i]), cmap='gray',
+        print('subgraph, which has %s nodes.' % bench_data['s'][fig_i])
+        nx.draw_networkx_nodes(graph, pos, node_size=5, nodelist=range(p),
+                               linewidths=.2, node_color='w',
                                edgecolors='gray', font_size=6)
-        nx.draw_networkx_edges(graph, pos, alpha=0.4, width=0.5, edge_color='gray', font_size=6)
-        nx.draw_networkx_edges(graph, pos, alpha=0.8, width=0.5, edgelist=red_edge_list, edge_color='r', font_size=6)
+        nx.draw_networkx_nodes(graph, pos, node_size=5,
+                               nodelist=bench_data[fig_i], linewidths=.2,
+                               node_color=[1.] * len(bench_data[fig_i]),
+                               cmap='gray', edgecolors='gray', font_size=6)
+        nx.draw_networkx_edges(graph, pos, alpha=0.4, width=0.5,
+                               edge_color='gray', font_size=6)
+        nx.draw_networkx_edges(graph, pos, alpha=0.8, width=0.5,
+                               edgelist=red_edge_list, edge_color='r',
+                               font_size=6)
         plt.axis('off')
         fig = plt.gcf()
         fig.set_figheight(2)
@@ -1152,9 +1166,39 @@ def show_figure_2():
             ax.margins(0.02, 0.02)
             ax.xaxis.set_major_locator(plt.NullLocator())
             ax.yaxis.set_major_locator(plt.NullLocator())
-        f_name = '../results/benchmark/figs/figure_2_%d.pdf' % (iii + 1)
+        f_name = 'figs/figure_02_%d.pdf' % (iii + 1)
         fig.savefig(f_name, dpi=1200, pad_inches=0.0, format='pdf')
         plt.close()
+
+
+def show_4_tables():
+    all_methods = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'da-sgl', 'sto-iht',
+                   'graph-sto-iht', 'da-iht',
+                   'graph-da-iht']
+    method_labels = {
+        'rda-l1': '\\textbf{$\displaystyle \ell_1$-\\textsc{RDA}}',
+        'da-iht': '\\textbf{\\textsc{DA-IHT}}',
+        'adagrad': '\\textbf{\\textsc{AdaGrad}}',
+        'sto-iht': '\\textbf{\\textsc{StoIHT}}',
+        'graph-sto-iht': '\\textbf{\\textsc{GraphStoIHT}}',
+        'da-gl': '\\textbf{\\textsc{DA-GL}}',
+        'da-sgl': '\\textbf{\\textsc{DA-SGL}}',
+        'adam': '\\textbf{\\textsc{ADAM}}',
+        'graph-da-iht': '\\textbf{\\textsc{GraphDA}}',
+        'best-subset': '\\textbf{\\textsc{BestSubset}}'}
+    num_trials, root = 20, '../results/benchmark/fix_tr_mu/'
+    for (fig_i, i) in bench_data['fig_list']:
+        print('\n\n--- %s ---' % fig_i)
+        all_results = []
+        for trial_i in range(num_trials):
+            f_name = root + 'fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (
+                i, trial_i)
+            out = pickle.load(open(f_name))
+            all_results.append(out['summary_results'])
+        if fig_i == 'fig_1':
+            print_result(method_labels, all_methods, all_results)
+        else:
+            print_result_2(method_labels, all_methods, all_results)
 
 
 def show_figure_3():
@@ -1166,32 +1210,40 @@ def show_figure_3():
     rcParams['figure.figsize'] = 8.3, 4
     method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'graph-sto-iht',
                    'sto-iht', 'da-sgl', 'da-iht', 'graph-da-iht']
-    label_list = ['ADAM', r'$\displaystyle \ell_1$-RDA', 'AdaGrad', 'DA-GL', 'GraphStoIHT',
+    label_list = ['ADAM', r'$\displaystyle \ell_1$-RDA', 'AdaGrad', 'DA-GL',
+                  'GraphStoIHT',
                   'StoIHT', 'DA-SGL', 'DA-IHT', 'GraphDA']
     marker_list = ['p', '>', '<', 'X', 'o', '*', 'v', '^', 's']
     color_list = ['b', 'g', 'y', 'c', 'gray', 'k', 'indianred', 'm', 'r']
-    # generate first figure
+    # generate figure 3 shown in the paper.
     metric_list = ['best-acc-wt']
-    fig_title = [r'(a) \textit{Graph01}', r'(b) \textit{Graph02}', r'(c) \textit{Graph03}', r'(d) \textit{Graph04}']
+    fig_title = [r'(a) \textit{Graph01}', r'(b) \textit{Graph02}',
+                 r'(c) \textit{Graph03}', r'(d) \textit{Graph04}']
     fig, ax = plt.subplots(nrows=2, ncols=4, sharex='all', sharey='all')
     for i, j in product(range(2), range(4)):
-        ax[i, j].grid(b=True, which='both', color='gray', linestyle='--', axis='both')
+        ax[i, j].grid(b=True, which='both', color='gray', linestyle='--',
+                      axis='both')
     for fig_id in [1, 2, 3, 4]:
         average_results = dict()
         for ind_method, method in enumerate(method_list):
             average_results[method] = dict()
             for ind_metric, metric in enumerate(metric_list):
                 average_results[method][metric] = dict()
-                average_results[method][metric]['wt'] = np.zeros(shape=(20, 400))
-                average_results[method][metric]['wt_bar'] = np.zeros(shape=(20, 400))
+                average_results[method][metric]['wt'] = np.zeros(
+                    shape=(20, 400))
+                average_results[method][metric]['wt_bar'] = np.zeros(
+                    shape=(20, 400))
         for trial_i in range(20):
-            f_name = '../results/benchmark/fix_tr_mu/fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (fig_id, trial_i)
+            f_name = '../results/benchmark/fix_tr_mu/fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (
+                fig_id, trial_i)
             results = pickle.load(open(f_name))['summary_results']
             results = {_[1]: _[0] for _ in results}
             for ind_method, method in enumerate(method_list):
                 for ind_metric, metric in enumerate(metric_list):
-                    average_results[method][metric]['wt'][trial_i] = results[method][metric]['missed_wt']
-                    average_results[method][metric]['wt_bar'][trial_i] = results[method][metric]['missed_wt_bar']
+                    average_results[method][metric]['wt'][trial_i] = \
+                        results[method][metric]['missed_wt']
+                    average_results[method][metric]['wt_bar'][trial_i] = \
+                        results[method][metric]['missed_wt_bar']
         for ind_method, method in enumerate(method_list):
             for ind_metric, metric in enumerate(metric_list):
                 re = np.mean(average_results[method][metric]['wt'], axis=0)
@@ -1202,32 +1254,42 @@ def show_figure_3():
                 ax[0, 0].set_ylim([1.6, 2.2])
                 ax[0, 1].set_ylim([1.6, 2.2])
                 ax[0, fig_id - 1].plot(
-                    x, np.log10(re[x]), marker=marker_list[ind_method], markersize=4.,
+                    x, np.log10(re[x]), marker=marker_list[ind_method],
+                    markersize=4.,
                     markerfacecolor='white', markeredgewidth=1.,
-                    color=color_list[ind_method], label=label_list[ind_method], linewidth=1.)
-                ax[1, 1].legend(loc='lower center', bbox_to_anchor=(0.9, -0.65), ncol=5, fontsize=14,
-                                borderpad=0.01, columnspacing=0.1, labelspacing=0.02,
+                    color=color_list[ind_method], label=label_list[ind_method],
+                    linewidth=1.)
+                ax[1, 1].legend(loc='lower center',
+                                bbox_to_anchor=(0.9, -0.65), ncol=5,
+                                fontsize=14,
+                                borderpad=0.01, columnspacing=0.1,
+                                labelspacing=0.02,
                                 handletextpad=0.01, framealpha=1.0)
                 if ind_metric == 0:
-                    ax[0, ind_metric].set_ylabel(r"$\displaystyle \log (\textit{Miss}_{{\bf w}_t}$)",
-                                                 fontsize=16, labelpad=0.01)
-                    ax[1, ind_metric].set_ylabel(r"$\displaystyle \log (\textit{Miss}_{\bar{{\bf w}_t}} $)",
-                                                 fontsize=16, labelpad=0.01)
+                    ax[0, ind_metric].set_ylabel(
+                        r"$\displaystyle \log (\textit{Miss}_{{\bf w}_t}$)",
+                        fontsize=16, labelpad=0.01)
+                    ax[1, ind_metric].set_ylabel(
+                        r"$\displaystyle \log (\textit{Miss}_{\bar{{\bf w}_t}} $)",
+                        fontsize=16, labelpad=0.01)
                 else:
                     ax[0, fig_id - 1].set_yticklabels('')
                     ax[1, fig_id - 1].set_yticklabels('')
                 re = np.mean(average_results[method][metric]['wt_bar'], axis=0)
                 ax[0, fig_id - 1].set_title(fig_title[fig_id - 1])
                 ax[1, fig_id - 1].plot(
-                    x, np.log10(re[x]), marker=marker_list[ind_method], markersize=4.,
+                    x, np.log10(re[x]), marker=marker_list[ind_method],
+                    markersize=4.,
                     markerfacecolor='white', markeredgewidth=1.,
-                    color=color_list[ind_method], label=label_list[ind_method], linewidth=1.)
+                    color=color_list[ind_method], label=label_list[ind_method],
+                    linewidth=1.)
                 ax[1, fig_id - 1].set_xlabel("Samples Seen", labelpad=0.03)
 
     plt.subplots_adjust(wspace=0, hspace=0)
     f_name = '../results/benchmark/figs/figure_3.pdf'
     print('save fig to: %s' % f_name)
-    fig.savefig(f_name, dpi=1200, bbox_inches='tight', pad_inches=0.03, format='pdf')
+    fig.savefig(f_name, dpi=1200, bbox_inches='tight', pad_inches=0.03,
+                format='pdf')
     plt.close()
 
 
@@ -1245,12 +1307,15 @@ def show_figure_4(trial_i=0):
     # we use the first figure to do the experiments.
     method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'da-sgl', 'sto-iht',
                    'graph-sto-iht', 'da-iht', 'graph-da-iht']
-    label_list = ['\\textsc{Adam}', r'$\displaystyle \ell_1$' + '\\textsc{-RDA}',
+    label_list = ['\\textsc{Adam}',
+                  r'$\displaystyle \ell_1$' + '\\textsc{-RDA}',
                   '\\textsc{AdaGrad}', '\\textsc{DA-GL}',
                   '\\textsc{DA-SGL}', '\\textsc{StoIHT}',
-                  '\\textsc{GraphStoIHT}', '\\textsc{DA-IHT}', '\\textsc{GraphDA}']
+                  '\\textsc{GraphStoIHT}', '\\textsc{DA-IHT}',
+                  '\\textsc{GraphDA}']
     for fig_id in range(1, 5):
-        f_name = '../results/benchmark/fix_tr_mu/fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (fig_id, trial_i)
+        f_name = '../results/benchmark/fix_tr_mu/fig%d_mu_0.3_trial_%02d_fix_tr_mu.pkl' % (
+            fig_id, trial_i)
         results = pickle.load(open(f_name))['summary_results']
         results = {_[1]: _[0] for _ in results}
         for i, j in product(range(4), range(10)):
@@ -1265,11 +1330,14 @@ def show_figure_4(trial_i=0):
             w = re['wt'][:length * width]
             w[w > 0.0] = 1.0
             w[w < 0.0] = -1.0
-            ax[fig_id - 1, i].imshow(w.reshape(length, width), cmap='gray', vmin=-1, vmax=1)
+            ax[fig_id - 1, i].imshow(w.reshape(length, width), cmap='gray',
+                                     vmin=-1, vmax=1)
             ax[0, i].set_title('%s' % label_list[i])
         ax[fig_id - 1, 0].margins(y=20)
-        ax[fig_id - 1, 0].set_ylabel(r"\textit{Graph%02d}-$\displaystyle {\bf w}_t$" % fig_id, fontsize=18,
-                                     labelpad=0)
+        ax[fig_id - 1, 0].set_ylabel(
+            r"\textit{Graph%02d}-$\displaystyle {\bf w}_t$" % fig_id,
+            fontsize=18,
+            labelpad=0)
 
         plt.setp(ax[fig_id - 1, 0].get_xticklabels(), visible=False)
         plt.setp(ax[fig_id - 1, 0].get_yticklabels(), visible=False)
@@ -1280,14 +1348,16 @@ def show_figure_4(trial_i=0):
         w[bench_data['fig_%d' % fig_id]] = 1.0
         w[w > 0.0] = 1.0
         w[w < 0.0] = -1.0
-        ax[fig_id - 1, 9].imshow(w.reshape(length, width), cmap='gray', vmin=-1, vmax=1)
+        ax[fig_id - 1, 9].imshow(w.reshape(length, width), cmap='gray',
+                                 vmin=-1, vmax=1)
         w[bench_data['fig_%d' % fig_id]] = 1.0
         ax[0, 9].set_title('\\textsc{True Model}')
         fig = plt.gcf()
     f_name = '../results/benchmark/figs/figure_4.pdf'
     print('save fig to: %s' % f_name)
     plt.subplots_adjust(wspace=0.01, hspace=0.01)
-    fig.savefig(f_name, dpi=600, bbox_inches='tight', pad_inches=0.03, format='pdf')
+    fig.savefig(f_name, dpi=600, bbox_inches='tight', pad_inches=0.03,
+                format='pdf')
     plt.close()
 
 
@@ -1312,7 +1382,8 @@ def show_figure_5():
     fig, ax = plt.subplots(1, 4)
     for i in range(4):
         ax[i].grid(color='gray', linestyle='--')
-    title_list = [r'(a) \textit{Graph01}', r'(b) \textit{Graph02}', r'(c) \textit{Graph03}', r'(d) \textit{Graph04}']
+    title_list = [r'(a) \textit{Graph01}', r'(b) \textit{Graph02}',
+                  r'(c) \textit{Graph03}', r'(d) \textit{Graph04}']
     ax[0].set_xticks(range(12, 60, 12))
     ax[1].set_xticks(range(20, 90, 20))
     ax[2].set_xticks(range(40, 180, 40))
@@ -1326,16 +1397,19 @@ def show_figure_5():
     ax[3].set_ylim([0.02, 0.25])
     ax[3].set_yticks([0.06, 0.11, 0.16, 0.21])
     for (fig_i, fig_ind) in bench_data['fig_list']:
-        all_results = {_: {method: [] for method in method_list} for _ in sparsity_list[fig_i]}
+        all_results = {_: {method: [] for method in method_list} for _ in
+                       sparsity_list[fig_i]}
         for trial_i in range(num_trials):
-            f_name = '../results/benchmark/diff_s/fig%d_mu_%.1f_trial_%02d_diff_s.pkl' % (fig_ind, mu, trial_i)
+            f_name = '../results/benchmark/diff_s/fig%d_mu_%.1f_trial_%02d_diff_s.pkl' % (
+                fig_ind, mu, trial_i)
             results = pickle.load(open(f_name))
             for method in method_list:
                 str_ = []
                 for s in sparsity_list[fig_i]:
                     result = results[s]['summary_results']
                     result = {_[1]: _[0] for _ in result}
-                    error_rate = 1. - result[method]['best-acc-wt']['te_acc_wt']
+                    error_rate = 1. - result[method]['best-acc-wt'][
+                        'te_acc_wt']
                     all_results[s][method].append(error_rate)
                     str_.append('%.3f' % error_rate)
         for ind_method, method in enumerate(method_list):
@@ -1346,9 +1420,15 @@ def show_figure_5():
                 mean_re.append(np.mean(all_results[s][method]))
                 std_re.append(np.std(all_results[s][method]))
                 str_.append('%.3f' % np.mean(all_results[s][method]))
-            ax[fig_ind - 1].errorbar(x=sparsity_list[fig_i], y=np.asarray(mean_re), yerr=np.asarray(std_re),
-                                     color=color_list[ind_method], marker=marker_list[ind_method], markersize=3.,
-                                     markerfacecolor='white', label=label_list[ind_method], linewidth=1.0)
+            ax[fig_ind - 1].errorbar(x=sparsity_list[fig_i],
+                                     y=np.asarray(mean_re),
+                                     yerr=np.asarray(std_re),
+                                     color=color_list[ind_method],
+                                     marker=marker_list[ind_method],
+                                     markersize=3.,
+                                     markerfacecolor='white',
+                                     label=label_list[ind_method],
+                                     linewidth=1.0)
             ax[3].legend(loc='upper right', fontsize=10,
                          borderpad=0.2, columnspacing=0.2, labelspacing=0.2,
                          handletextpad=0.2, framealpha=1.0)
@@ -1358,7 +1438,8 @@ def show_figure_5():
     plt.subplots_adjust(wspace=0.3, hspace=0)
     f_name = '../results/benchmark/figs/figure_5.pdf'
     print('save file to: %s' % f_name)
-    plt.savefig(f_name, dpi=1200, bbox_inches='tight', pad_inches=0, format='pdf')
+    plt.savefig(f_name, dpi=1200, bbox_inches='tight', pad_inches=0,
+                format='pdf')
     plt.close()
 
 
@@ -1369,17 +1450,22 @@ def show_figure_6_all():
     plt.rc('font', **{'size': 15})
     rc('text', usetex=True)
     rcParams['figure.figsize'] = 16, 6
-    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'graph-sto-iht', 'sto-iht', 'da-sgl', 'da-iht', 'graph-da-iht']
-    label_list = [r'\textsc{Adam}', 'RDA-L1', 'AdaGrad', 'DA-GL', 'GraphIHT', 'StoIHT', 'DA-SGL', 'DA-IHT', 'GraphDA']
+    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'graph-sto-iht',
+                   'sto-iht', 'da-sgl', 'da-iht',
+                   'graph-da-iht']
+    label_list = [r'\textsc{Adam}', 'RDA-L1', 'AdaGrad', 'DA-GL', 'GraphIHT',
+                  'StoIHT', 'DA-SGL', 'DA-IHT', 'GraphDA']
     marker_list = ['p', '>', '<', 'X', 'o', '*', 'v', '^', 's']
     color_list = ['b', 'g', 'y', 'c', 'gray', 'k', 'indianred', 'm', 'r']
-    fig_title = [r'(a) \textit{Graph01}', r'(b) \textit{Graph02}', r'(c) \textit{Graph03}', r'(d) \textit{Graph04}']
+    fig_title = [r'(a) \textit{Graph01}', r'(b) \textit{Graph02}',
+                 r'(c) \textit{Graph03}', r'(d) \textit{Graph04}']
     num_tr_list = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
     num_trials = 20
     fig, ax = plt.subplots(nrows=2, ncols=4)
     for i in range(2):
         for j in range(4):
-            ax[i, j].grid(b=True, which='both', color='gray', linestyle='--', axis='both')
+            ax[i, j].grid(b=True, which='both', color='gray', linestyle='--',
+                          axis='both')
             ax[i, j].set_xticks(np.arange(100, 1001, 100.))
     for i in range(2):
         for j in range(4):
@@ -1390,24 +1476,30 @@ def show_figure_6_all():
     for fig_ind, fig_id in enumerate([1, 2, 3, 4]):
         raw_data = dict()
         for trial_i in range(num_trials):
-            f_name = '../results/benchmark/diff_tr/fig%d_mu_0.3_trial_%02d_diff_tr.pkl' % (fig_id, trial_i)
+            f_name = '../results/benchmark/diff_tr/fig%d_mu_0.3_trial_%02d_diff_tr.pkl' % (
+                fig_id, trial_i)
             results = pickle.load(open(f_name))
             raw_data[trial_i] = results
-        for tag_ind, (tag1, tag2) in enumerate(zip(['wt', 'wt-bar'], ['wt', 'wt_bar'])):
-            all_results = {_: {method: [] for method in method_list} for _ in num_tr_list}
+        for tag_ind, (tag1, tag2) in enumerate(
+                zip(['wt', 'wt-bar'], ['wt', 'wt_bar'])):
+            all_results = {_: {method: [] for method in method_list} for _ in
+                           num_tr_list}
             for trial_i in range(num_trials):
                 results = raw_data[trial_i]
                 for n in num_tr_list:
                     result = results[n]['summary_results']
                     result = {_[1]: _[0] for _ in result}
                     for method in method_list:
-                        all_results[n][method].append(result[method]['best-acc-%s' % tag1]['te_acc_%s' % tag2])
+                        all_results[n][method].append(
+                            result[method]['best-acc-%s' % tag1][
+                                'te_acc_%s' % tag2])
             for n in num_tr_list:
                 for method in method_list:
                     all_results[n][method] = np.mean(all_results[n][method])
             for ind_method, method in enumerate(method_list):
                 ax[tag_ind, fig_ind].plot(num_tr_list,
-                                          [all_results[_][method] for _ in num_tr_list],
+                                          [all_results[_][method] for _ in
+                                           num_tr_list],
                                           color=color_list[ind_method],
                                           marker=marker_list[ind_method],
                                           label=label_list[ind_method],
@@ -1417,7 +1509,8 @@ def show_figure_6_all():
                 if fig_ind != 0:
                     ax[tag_ind, fig_ind].set_yticklabels('')
                     ax[tag_ind, fig_ind].set_yticklabels('')
-            ax[1, 1].legend(loc='upper center', bbox_to_anchor=(0.5, -0.18), ncol=5)
+            ax[1, 1].legend(loc='upper center', bbox_to_anchor=(0.5, -0.18),
+                            ncol=5)
             for j in range(4):
                 ax[1, j].set_xlabel('Samples Seen')
             ax[0, 0].set_ylabel("Accuracy")
@@ -1437,17 +1530,22 @@ def show_figure_6(fig_id=1):
     plt.rc('font', **{'size': 15})
     rc('text', usetex=True)
     rcParams['figure.figsize'] = 8, 3
-    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'graph-sto-iht', 'sto-iht', 'da-sgl', 'da-iht', 'graph-da-iht']
-    label_list = [r'\textsc{Adam}', r'$\displaystyle \ell_1$-\textsc{RDA}', r'\textsc{AdaGrad}',
+    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'graph-sto-iht',
+                   'sto-iht', 'da-sgl', 'da-iht',
+                   'graph-da-iht']
+    label_list = [r'\textsc{Adam}', r'$\displaystyle \ell_1$-\textsc{RDA}',
+                  r'\textsc{AdaGrad}',
                   r'\textsc{DA-GL}', r'\textsc{GraphStoIHT}',
-                  r'\textsc{StoIHT}', r'\textsc{DA-SGL}', r'\textsc{DA-IHT}', r'\textsc{GraphDA}']
+                  r'\textsc{StoIHT}', r'\textsc{DA-SGL}', r'\textsc{DA-IHT}',
+                  r'\textsc{GraphDA}']
     marker_list = ['p', '>', '<', 'X', 'o', '*', 'v', '^', 's']
     color_list = ['b', 'g', 'y', 'c', 'gray', 'k', 'indianred', 'm', 'r']
     num_tr_list = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
     num_trials = 20
     fig, ax = plt.subplots(nrows=1, ncols=2, sharey='all')
     for i in range(2):
-        ax[i].grid(b=True, which='both', color='gray', linestyle='--', axis='both')
+        ax[i].grid(b=True, which='both', color='gray', linestyle='--',
+                   axis='both')
         ax[i].set_xticks(np.arange(100, 1001, 100.))
     if fig_id == 1:
         ax[1].set_yticks([0.55, 0.6, 0.65, 0.7, 0.75])
@@ -1472,39 +1570,48 @@ def show_figure_6(fig_id=1):
 
     raw_data = dict()
     for trial_i in range(num_trials):
-        f_name = '../results/benchmark/diff_tr/fig%d_mu_0.3_trial_%02d_diff_tr.pkl' % (fig_id, trial_i)
+        f_name = '../results/benchmark/diff_tr/fig%d_mu_0.3_trial_%02d_diff_tr.pkl' % (
+            fig_id, trial_i)
         results = pickle.load(open(f_name))
         raw_data[trial_i] = results
-    for tag_ind, (tag1, tag2) in enumerate(zip(['wt', 'wt-bar'], ['wt', 'wt_bar'])):
+    for tag_ind, (tag1, tag2) in enumerate(
+            zip(['wt', 'wt-bar'], ['wt', 'wt_bar'])):
         for metric_ind, metric in enumerate(['te_acc_%s' % tag2]):
-            all_results = {_: {method: [] for method in method_list} for _ in num_tr_list}
+            all_results = {_: {method: [] for method in method_list} for _ in
+                           num_tr_list}
             for trial_i in range(num_trials):
                 results = raw_data[trial_i]
                 for n in num_tr_list:
                     result = results[n]['summary_results']
                     result = {_[1]: _[0] for _ in result}
                     for method in method_list:
-                        all_results[n][method].append(result[method]['best-acc-%s' % tag1][metric])
+                        all_results[n][method].append(
+                            result[method]['best-acc-%s' % tag1][metric])
             for n in num_tr_list:
                 for method in method_list:
                     all_results[n][method] = np.mean(all_results[n][method])
             for ind_method, method in enumerate(method_list):
                 ax[tag_ind].plot(
-                    num_tr_list, [all_results[_][method] for _ in num_tr_list], color=color_list[ind_method],
-                    marker=marker_list[ind_method], markerfacecolor='white', markeredgewidth=1.5,
+                    num_tr_list, [all_results[_][method] for _ in num_tr_list],
+                    color=color_list[ind_method],
+                    marker=marker_list[ind_method], markerfacecolor='white',
+                    markeredgewidth=1.5,
                     label=label_list[ind_method], linewidth=1.5)
-        ax[1].legend(loc='center right', bbox_to_anchor=(1.73, 0.5), ncol=1, fontsize=16,
+        ax[1].legend(loc='center right', bbox_to_anchor=(1.73, 0.5), ncol=1,
+                     fontsize=16,
                      borderpad=0.2, columnspacing=0.5, labelspacing=0.2,
                      handletextpad=0.2, framealpha=1.0)
         for j in range(2):
             ax[j].set_xlabel('Samples Seen')
         ax[0].set_title(r"(a) $\displaystyle Acc_{{\bf w}_t}$", fontsize=15)
-        ax[1].set_title(r"(b) $\displaystyle Acc_{{\bar{\bf w}}_t}$", fontsize=15)
+        ax[1].set_title(r"(b) $\displaystyle Acc_{{\bar{\bf w}}_t}$",
+                        fontsize=15)
     plt.subplots_adjust(wspace=0, hspace=0.1)
     f_name = '../results/benchmark/figs/figure_6.pdf'
     print('save fig to: %s' % f_name)
     plt.subplots_adjust(wspace=0.0, hspace=0)
-    plt.savefig(f_name, dpi=1200, bbox_inches='tight', pad_inches=0.05, format='pdf')
+    plt.savefig(f_name, dpi=1200, bbox_inches='tight', pad_inches=0.05,
+                format='pdf')
     plt.close()
 
 
@@ -1515,17 +1622,22 @@ def show_figure_7(fig_id=1):
     plt.rc('font', **{'size': 12})
     rc('text', usetex=True)
     rcParams['figure.figsize'] = 8, 3
-    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'graph-sto-iht', 'sto-iht', 'da-sgl', 'da-iht', 'graph-da-iht']
-    label_list = [r'\textsc{Adam}', r'$\displaystyle \ell_1$-\textsc{RDA}', r'\textsc{AdaGrad}',
+    method_list = ['adam', 'rda-l1', 'adagrad', 'da-gl', 'graph-sto-iht',
+                   'sto-iht', 'da-sgl', 'da-iht',
+                   'graph-da-iht']
+    label_list = [r'\textsc{Adam}', r'$\displaystyle \ell_1$-\textsc{RDA}',
+                  r'\textsc{AdaGrad}',
                   r'\textsc{DA-GL}', r'\textsc{GraphStoIHT}',
-                  r'\textsc{StoIHT}', r'\textsc{DA-SGL}', r'\textsc{DA-IHT}', r'\textsc{GraphDA}']
+                  r'\textsc{StoIHT}', r'\textsc{DA-SGL}', r'\textsc{DA-IHT}',
+                  r'\textsc{GraphDA}']
     marker_list = ['p', '>', '<', 'X', 'o', '*', 'v', '^', 's']
     color_list = ['b', 'g', 'y', 'c', 'gray', 'k', 'indianred', 'm', 'r']
     num_trials = 20
     mu_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     fig, ax = plt.subplots(nrows=1, ncols=2, sharey='all')
     for i in range(2):
-        ax[i].grid(b=True, which='both', color='gray', linestyle='--', axis='both')
+        ax[i].grid(b=True, which='both', color='gray', linestyle='--',
+                   axis='both')
         ax[i].set_xticks([0.2, 0.4, 0.6, 0.8])
     ax[0].set_yticks([0.6, 0.7, 0.8, 0.9])
     for i in range(2):
@@ -1535,10 +1647,12 @@ def show_figure_7(fig_id=1):
     for trial_i in range(num_trials):
         results = dict()
         for mu in mu_list:
-            f_name = '../results/benchmark/diff_mu/fig%d_mu_%.1f_trial_%02d_diff_mu.pkl' % (fig_id, mu, trial_i)
+            f_name = '../results/benchmark/diff_mu/fig%d_mu_%.1f_trial_%02d_diff_mu.pkl' % (
+                fig_id, mu, trial_i)
             results[mu] = pickle.load(open(f_name))
         raw_data[trial_i] = results
-    for tag_ind, (tag1, tag2) in enumerate(zip(['wt', 'wt-bar'], ['wt', 'wt_bar'])):
+    for tag_ind, (tag1, tag2) in enumerate(
+            zip(['wt', 'wt-bar'], ['wt', 'wt_bar'])):
         for metric_ind, metric in enumerate(['te_acc_%s' % tag2]):
             all_results = {_: {__: [] for __ in method_list} for _ in mu_list}
             for trial_i in range(num_trials):
@@ -1547,14 +1661,19 @@ def show_figure_7(fig_id=1):
                     result = results[mu]['summary_results']
                     result = {_[1]: _[0] for _ in result}
                     for method in method_list:
-                        all_results[mu][method].append(result[method]['best-acc-%s' % tag1][metric])
+                        all_results[mu][method].append(
+                            result[method]['best-acc-%s' % tag1][metric])
             for mu, method in product(mu_list, method_list):
                 all_results[mu][method] = np.mean(all_results[mu][method])
             for ind_method, method in enumerate(method_list):
-                ax[tag_ind].plot(mu_list, [all_results[_][method] for _ in mu_list], color=color_list[ind_method],
-                                 marker=marker_list[ind_method], markerfacecolor='white', markeredgewidth=1.5,
+                ax[tag_ind].plot(mu_list,
+                                 [all_results[_][method] for _ in mu_list],
+                                 color=color_list[ind_method],
+                                 marker=marker_list[ind_method],
+                                 markerfacecolor='white', markeredgewidth=1.5,
                                  label=label_list[ind_method], linewidth=1.5)
-    ax[1].legend(loc='center right', bbox_to_anchor=(1.73, 0.5), ncol=1, fontsize=16,
+    ax[1].legend(loc='center right', bbox_to_anchor=(1.73, 0.5), ncol=1,
+                 fontsize=16,
                  borderpad=0.2, columnspacing=0.5, labelspacing=0.2,
                  handletextpad=0.2, framealpha=1.0)
     for j in range(2):
@@ -1564,16 +1683,19 @@ def show_figure_7(fig_id=1):
     f_name = '../results/benchmark/figs/figure_7.pdf'
     print('save file to %s' % f_name)
     plt.subplots_adjust(wspace=0, hspace=0.05)
-    plt.savefig(f_name, dpi=1200, bbox_inches='tight', pad_inches=0.05, format='pdf')
+    plt.savefig(f_name, dpi=1200, bbox_inches='tight', pad_inches=0.05,
+                format='pdf')
     plt.close()
 
 
 def print_help():
-    print('%s is a wrong option, you have the following options:' % sys.argv[1])
-    print('\n'.join(['python exp_logit_benchmark.py run_fix_n trial_i num_cpus',
-                     'python exp_logit_benchmark.py rep trial_i num_cpus',
-                     'python exp_logit_benchmark.py show_run',
-                     'python exp_logit_benchmark.py show_rep']))
+    print(
+        '%s is a wrong option, you have the following options:' % sys.argv[1])
+    print(
+        '\n'.join(['python exp_logit_benchmark.py run_fix_n trial_i num_cpus',
+                   'python exp_logit_benchmark.py rep trial_i num_cpus',
+                   'python exp_logit_benchmark.py show_run',
+                   'python exp_logit_benchmark.py show_rep']))
 
 
 def generate_dataset(root):
@@ -1589,10 +1711,15 @@ def generate_dataset(root):
     # the final results will averaged on these 20 experiments.
     for ((fig_i, i), mu) in product(bench_data['fig_list'], mu_list):
         for trial_i in range(num_trials):
-            data = generate_grid_data(width=33, height=33, num_tr=num_tr, num_va=num_va, num_te=num_te,
-                                      noise_mu=noise_mu, noise_std=noise_std, mu=mu, sub_graph=bench_data[fig_i],
-                                      fig_id=i, trial_i=trial_i, num_trials=num_trials, mu_strategy='constant')
-            f_name = root + 'input/fig%d_mu_%.1f_trial_%02d.pkl' % (i, mu, trial_i)
+            data = generate_grid_data(width=33, height=33, num_tr=num_tr,
+                                      num_va=num_va, num_te=num_te,
+                                      noise_mu=noise_mu, noise_std=noise_std,
+                                      mu=mu, sub_graph=bench_data[fig_i],
+                                      fig_id=i, trial_i=trial_i,
+                                      num_trials=num_trials,
+                                      mu_strategy='constant')
+            f_name = root + 'input/fig%d_mu_%.1f_trial_%02d.pkl' % (
+                i, mu, trial_i)
             print('save file to: %s' % f_name)
             if not os.path.exists(f_name):
                 pickle.dump(data, open(f_name, 'wb'))
