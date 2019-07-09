@@ -28,8 +28,46 @@ To generate Figure 2, run the following command:
 >>> python exp_logit_benchmark.py show_figure_2
 ```
 
-### Figure 3
-To generate Figure 3, run the following command:
+### Figure 3-7
+To generate Figure 3-7, run the following command:
 ```sh
->>> python exp_logit_benchmark.py show_figure_2
+>>> python exp_logit_benchmark.py show_figure_3-7
+```
+
+### Figure 8
+To generate Figure 8, run the following command:
+```sh
+>>> python exp_linear_mnist.py show_figure_8
+```
+
+### Figure 9-10
+To generate Figure 9-10, run the following command:
+```sh
+>>> python exp_logit_kegg.py show_figure_9-10
+```
+
+### Figure 11
+To generate Figure 11, run the following command:
+```sh
+>>> python exp_linear_mnist.py show_figure_11
+```
+
+### Figure 12
+To generate Figure 12, run the following command:
+```sh
+>>> python exp_logit_kegg.py show_figure_12
+```
+
+### Table 1-4
+To generate Figure 12, run the following command:
+```sh
+>>> python exp_logit_benchmark.py show_4_tables
+```
+
+### Exactly Reproduce the results
+To reproduce those results, you need to run the following commands:
+```sh
+>>> python exp_logit_benchmark.py run_{fix_tr_mu,diff_tr,diff_mu,diff_s}
+>>> python exp_logit_kegg.py {test_graphda,test_baselines}
+>>> python exp_linear_mnist.py run_test
 ```
