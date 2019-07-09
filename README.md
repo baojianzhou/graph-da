@@ -11,5 +11,5 @@ More details of GraphDA can be found in: "Zhou, Baojian, Feng Chen, and Yiming Y
 Our code is based on [Openblas-0.3.1](https://github.com/xianyi/OpenBLAS/releases/tag/v0.3.1), which we already copied into our repository. You can first goto OpenBLAS-0.3.1 folder and then make install it via the following command:
 ```sh
 >>> cd OpenBLAS-0.3.1
->>> make && make install
+>>> make && make install PREFIX=../lib
 ```
