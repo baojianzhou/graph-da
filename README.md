@@ -15,3 +15,21 @@ Our code is based on [Openblas-0.3.1](https://github.com/xianyi/OpenBLAS/release
 ```
 
 The lib folder under graph-da and corresponding libraries will be generated.
+
+### Figure 1
+To generate Figure 1, run the following command:
+```sh
+>>> python exp_logit_benchmark.py show_figure_1
+```
+
+### Figure 2
+To generate Figure 2, run the following command:
+```sh
+>>> python exp_logit_benchmark.py show_figure_2
+```
+
+### Figure 3
+To generate Figure 3, run the following command:
+```sh
+>>> python exp_logit_benchmark.py show_figure_2
+```
