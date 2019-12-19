@@ -905,7 +905,7 @@ bool head_tail_binsearch(
         run_pcst(pcst, stat->re_nodes, stat->re_edges);
         free_pcst(pcst);
         cur_k = stat->re_nodes->size;
-        if (verbose >= 1) {$
+        if (verbose >= 1) {
             for (int ii = 0; ii < m; ii++) {
                 printf("E %d %d %.15f\n", edges[ii].first, edges[ii].second,
                        cur_costs[ii]);

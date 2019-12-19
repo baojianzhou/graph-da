@@ -1,8 +1,10 @@
 #!/bin/bash
-PYTHON_LIB=/usr/lib/python-2.7/lib/
+ROOT_PATH=/network/rit/lab/ceashpc/bz383376/opt/
+PYTHON_PATH=${ROOT_PATH}python-2.7.14/include/python2.7
 NUMPY_PATH=${ROOT_PATH}env-python2.7.14/lib/python2.7/site-packages/numpy/core/include/
-OPENBLAS_PATH=../lib/include/
-OPENBLAS_LIB=../lib/lib/
+OPENBLAS_PATH=${ROOT_PATH}openblas-0.3.1/include/
+OPENBLAS_LIB=${ROOT_PATH}openblas-0.3.1/lib/
+PYTHON_LIB=${ROOT_PATH}python-2.7.14/lib/
 FLAGS="-g -shared  -Wall -fPIC -std=c11 -O3 "
 SRC_1="c/fast_pcst.c c/fast_pcst.h "
 SRC_2="c/head_tail_proj.c c/head_tail_proj.h "
